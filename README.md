@@ -1,5 +1,5 @@
 # Call of Duty 
-Welcome! 
+#### Welcome! 
 For my full-stack application, I have created a gun tracker based off Call of Duty: Modern Warefare (COD). In this gun tracker, you can create a gun you may want in COD, and maybe you haven't unlocked it yet, you can add it to the tracker and it will show you the info on that gun until you delete it. This way, you can add all the guns you need to unlock before unlocking the final gun you're wanting. Once finished, you can use it as reference while playing COD to unlock guns.
 
 ![COD Gun Tracker](https://user-images.githubusercontent.com/113128158/214425712-4fbe6b71-d46b-4d45-8bb7-6042329d72c2.jpg)

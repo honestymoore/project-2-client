@@ -23,10 +23,10 @@ Version 1: As a user I want to be able to...
 
 Version 2: 
 As a user I want to be able to...
-    - have COD themed music playing in the background
-    - have an avatar connected to the user
+    -- have COD themed music playing in the background
+    -- have an avatar connected to the user
 
 Version 3:
 As a user I want to be able to...
-    - see each gun with an image of the gun when hitting "Show Gun" 
-    - have the avatar be styled with a "favorite" gun
+    -- see each gun with an image of the gun when hitting "Show Gun" 
+    -- have the avatar be styled with a "favorite" gun

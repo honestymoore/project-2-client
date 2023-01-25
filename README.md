@@ -10,8 +10,7 @@ To get started here is the link.
  
 Once opened, you can start by going to your desired gun in game, then come back to the page and fill out the gun form, and hit add. Once added, you can go back into the game and see which guns you need to unlock to get the gun you originally wanted. Then add these guns to the form as well. And finally, you can create a Loadout with these guns to keep track of each gun.
 
-## Technologies Used 
-HTML, CSS, Javascript, Express, Mongodb, Mongoose, Cors, Passport, Passport_JWT, Jsonwebtoken, and Bycrypt
+![COD Gun Tracker (3)](https://user-images.githubusercontent.com/113128158/214606361-25851b8d-d04f-46ff-9daa-6a62d29a6f0f.jpg)
 
 ## Next Steps
 Version 1: As a user I want to be able to... 

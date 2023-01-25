@@ -14,7 +14,8 @@ Once opened, you can start by going to your desired gun in game, then come back 
 
 ## Next Steps
 Version 1: As a user I want to be able to... 
-    - add a gun 
+    - add a gun
+    - show the guns
     - delete a gun 
     - update a gun 
     - login and logout 

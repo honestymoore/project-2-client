@@ -1,5 +1,4 @@
 // GUNS
-
 export const indexGun = () => {
     return fetch(`http://localhost:8000/guns`)
 }
@@ -72,3 +71,9 @@ export const deleteLoadout = (id) => {
         method: 'DELETE'
     })
 }
+// NOTE
+
+export const indexNote = () => {
+    return fetch(`http://localhost:8000/notes`)
+}
+

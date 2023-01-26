@@ -8,7 +8,7 @@ export const onIndexGunSuccess = (guns) => {
         const div = document.createElement('div')
         div.innerHTML = 
         `
-            <h3>${gun.name} ${gun.loadout}</h3>
+            <h3>${gun.name}</h3>
             <button data-id="${gun._id}">Show Gun</button>
         `
         indexGunContainer.appendChild(div)
@@ -35,11 +35,13 @@ export const onShowGunSuccess = (gun) => {
         <p>${gun.class}</p>
         <p>${gun.skin}</p>
         <p>${gun._id}</p>
+        <p>${gun.loadout}</p>
 
         <form data-id="${gun._id}">
             <input type="text" name="name" value="${gun.name}" />
             <input type="text" name="class" value="${gun.class}" />
             <input type="text" name="skin" value="${gun.skin}" />
+            <input type="text" name="loadout" value="${gun.loadout}"/>
             <input type="submit" value="Update Gun" />
         </form>
 

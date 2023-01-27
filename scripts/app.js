@@ -47,7 +47,6 @@ createGunForm.addEventListener('submit', (event) => {
 				name: event.target['name'].value,
 				class: event.target['class'].value,
 				skin: event.target['skin'].value,
-				loadout: event.target['loadout'].value
 			},
 		}
     createGun(gunData)

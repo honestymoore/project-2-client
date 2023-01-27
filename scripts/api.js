@@ -73,7 +73,13 @@ export const deleteLoadout = (id) => {
 }
 // NOTE
 
-export const indexNote = () => {
-    return fetch(`http://localhost:8000/notes`)
+export const createNote = (data) => {
+    return fetch(`http://localhost:8000/notes`, {
+        method: 'POST',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    })
 }
-

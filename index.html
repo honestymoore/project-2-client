@@ -5,81 +5,292 @@
     <meta http-equiv = "X-UA-Compatible" content = "IE=edge">
     <meta name = "viewport" content = "width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
     <script type = "module" src = "./scripts/app.js" defer></script>
     <title>COD Gun Tracker</title>
 
     <style>
         body {
             background-image:  url("images/cod-background.webp");
-            background-repeat: no-repeat;
-            background-size: fill;
+            background-repeat: repeat;
+            background-size: auto;
+            flex: row;
+            scroll-behavior: smooth;
         }
         h1 {
             text-align: center;
-            background-color: antiquewhite;
-            padding-top: 20px;
-            padding-bottom: 20px;
-        }
-        #input-container {
-            padding-top: 50px;
-            padding-bottom: 50px;
-            padding-left: 20px;
-        }
-        #create-gun-form, #create-loadout-form {
-            padding-left: 20px;
-        }
-        .login-container {
-            float: left;
-            padding-left: 20px;
+            padding-top: 30px;
         }
         h2 {
-            padding-left: 20px;
+            padding: 20px;
+            background-color: rgba(198, 164, 105, 0.3);
+        }
+        h3 {
+            padding: 10px;
+        }
+        footer {
+            text-align: center;
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+            padding: 20px;
+            background-color: rgba(198, 164, 105, 0.3);
+        }
+        ul {
+        list-style-type: none;
+        position: sticky;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        padding: 20px;
+        font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        }
+        li {
+        float: left;
+        }
+        li a {
+        display: block;
+        color: white;
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+        }
+        li a:hover {
+        background-color: rgb(28, 26, 26);
+        }
+        .active {
+        background-color: #fefefe;
+        }
+        .container {
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+            padding-bottom: 50px;
+        }
+        .index-container {
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+            padding: 20px;
+            background-color: rgba(198, 164, 105, 0.3);
+        }
+        .message-container {
+            float: left;
+        }
+        main {
+            background-color: rgba(198, 164, 105);
+            text-align: center;
+            padding: 40px;
+            border: 10px dashed rgba(0, 0, 0, 0.7);
+        }
+        #proilepic {
+            border-radius: 40%;
+        }
+        .overlay-container {
+            position: relative;
+        }
+        .image {
+        display: block;
+        width: 100%;
+        height: auto;
+        }
+        .overlay {
+        border-radius: 100%;
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 100%;
+        width: 100%;
+        opacity: 0;
+        transition: .5s ease;
+        background-color: rgba(0, 0, 0, 0.7);
+        }
+        .container:hover .overlay {
+        opacity: 1;
+        }
+        .text {
+        color: white;
+        font-size: 20px;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        -ms-transform: translate(-50%, -50%);
+        }
+        a {
+            color: white;
+            font-size: larger;
+        }
+        ul.list {
+            list-style-type: square;
+        }
+        #sign-in-form-container, #sign-up-form-container,
+        #index-gun-container, #index-loadout-container {
+            font-size: large;
+            color:#fefefe;
+        }
+        #logo {
+            height: 150px;
+        }
+        #pistols {
+            padding-top: 180px;
+            height: 30px;
+            float: right;
+        }
+        .nav {
+            padding-left: 50px;
         }
     </style>
 </head>
 <body>
 
-    <h1>Call of Duty: Modern Warfare II Gun Tracker</h1>
+<h1><img src="./images/CODMWII.webp" id="logo"></h1>
 
-    <h2>Enter Gun Info Here!</h2>
+    <!-- NavBar -->
+<div class="nav">
+    <ul>
+        <li><a href="#home">Home</a></li>
+        <li><a href="#info">Info</a></li>
+        <li><a href="#contact">Contact</a></li>
+        <li><a href="#about">About</a></li>
+    </ul>
+        <div id = "#home"></div>
+        <div id = "#info"></div>
+        <div id = "#contact"></div>
+        <div id = "#about"></div> 
+</div>
 
-    <form id = "create-gun-form">
-        <input type ="text" name ="name" placeholder="Name" />
-        <input type ="text" name ="class" placeholder ="Class" />
-        <input type ="text" name ="skin" placeholder ="Skin" />
-        <input type ="text" name="loadout" placeholder ="Loadout"/>
-        <button type="submit" value = "Add Gun" class="btn btn-dark">Add Gun</button>
-    </form>
+    <!-- Sign Up -->
+<div id="auth-container" class="container" id="home">
+        <div class="row">
+            <div class="col">
+                <h2>Sign Up!</h2>
+                <form id="sign-up-form-container">
+                    <div class="mb-3">
+                        <label for="exampleFormControlInput1" >Email:</label>
+                        <input type="email" id="exampleFormControlInput1" placeholder="Email" name="email">
+                    </div>
+                    <div class="mb-3">
+                        <label for="inputPassword" >Password:</label>
+                        <input type="password" id="inputPassword" name="password" placeholder="Password">
+                    </div>
+                    <button type="submit" class="btn btn-dark">Submit</button>
+                </form>
+            </div>
+            <div class="col">
 
-    <form id = "create-loadout-form">
-        <input type = "text" name = "name" placeholder = "Loadout Name" />
-        <button type="submit" value = "Create Loadout" class="btn btn-dark">Create Loadout</button>
-    </form>
-
-    <div id = "input-container">
-        <div id = "index-gun-container"></div>
-        <div id = "show-gun-container"></div>
-        <div id = "gun-message-container"></div>
-        <div id = "index-loadout-container"></div>
-        <div id = "show-loadout-container"></div>
-        <div id = "loadout-message-container"></div>
+    <!-- Sign In -->
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <h2>Sign In!</h2>
+                <form id="sign-in-form-container">
+                    <div class="mb-3">
+                        <label for="exampleFormControlInput1">Email:</label>
+                        <input type="email" placeholder="Email" name="email">
+                    </div>
+                    <div class="mb-3">
+                        <label for="inputPassword">Password:</label>
+                        <input type="password" name="password" placeholder="Password">
+                    </div>
+                    <button type="submit" class="btn btn-dark">Submit</button>
+                </form>
+            </div>
+        </div>
     </div>
+</div>
 
-    <h2>Login Here!</h2>
+<!-- Messages -->
+<div id="message-user-container"></div>
 
-    <div class = "login-container">
-
-    <div class="enter-container">
-        <label for="uname"><b>Username: </b></label>
-        <input type="text" placeholder="Enter Username" name="uname" required>
-  
-        <label for="psw"><b>Password: </b></label>
-        <input type="password" placeholder="Enter Password" name="psw" required>
-          
-        <button type="submit" class="btn btn-dark">Login</button>
+    <!-- Gun Form -->
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <h2>Enter Gun Info Here!</h2>
+                <form id = "create-guns-form">
+                    <div class="mb-3">
+                        <input type="text" name ="name" placeholder="Name" />
+                        <input type="text" name ="class" placeholder ="Class" />
+                        <input type="text" name ="skin" placeholder ="Skin" />
+                        <input type="text" name="loadout" placeholder ="Loadout"/>
+                    <button type="submit" value = "Add Gun" class="btn btn-dark">Add Gun</button>
+                </form>
+                    <div class="row">
+                        <div class="col">
+                        <form id="create-loadout-form">
+                                <input type="text" name="name" placeholder="Loadout Name" />
+                            <button type="submit" value="Create Loadout" class="btn btn-dark">Create Loadout</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
+</div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+<div id="message-container"></div>
+
+<div id="index-container" class="hide">
+    <h2>Guns</h2>
+        <div id="index-gun-container" class="content-container">
+            <div id="index-gun-container"></div>
+            <div id="show-gun-container"></div>
+            <div id="gun-message-container"></div>
+        </div>
+    <h2>Loadouts</h2>
+        <div id="index-loadout-container" class="content-container">
+            <div id="index-loadout-container"></div>
+            <div id="show-loadout-container"></div>
+            <div id="loadout-message-container"></div>
+            <div id="index-note-container"></div>
+        </div>
+</div>
+   
+<div class="hide container" id="show-gun-container"></div>
+<div class="hide container" id="show-loadout-container"></div>
+<div class="hide" id="add-note-container">
 
 </body>
+<main id="info">
+    <h2>Info on the Application</h2>
+    <p>Welcome! For my full-stack application, I have created a gun tracker based off Call of Duty: Modern Warfare (COD).
+        <br>In this gun tracker, you can create a gun you may want in COD, and maybe you haven't unlocked it yet, 
+        <br>you can add it to the tracker and it will show you the info on that gun until you delete it.
+        <br>This way, you can add all the guns you need to unlock before unlocking the final gun you're wanting. 
+        <br>Once finished, you can use it as reference while playing COD to unlock guns.</p>
+    <h2>Contact</h2>
+    <div class="overlay-container">
+    <img src="/images/profilepic.jpeg" alt="Very Professional Profile Pic" width="300" height="200" id="profilepic">
+    <div class="overlay">
+        <div class="text">Nice to meet you! I am Honesty<br>Moore, currently a fellow at General Assembly, studying Software Engineering.<br>
+        Contact me below!</div>
+    </div>
+    </div>
+    <br>
+    <h2>Socials: </h2>
+    <a href = "https://www.linkedin.com/in/honestymoore/">LinkedIn</a>
+    <br>
+    <a href = "https://github.com/honestymoore">GitHub</a>
+    <h2>About</h2>
+    <p>Starting this project, I wasn't quite sure what I was going to do. Luckily, I had video games to inspire me. So I started to look into games I played everyday.
+    Recently, Activision's COD:MW II came out, and I had picked it up and saw an application I could make for this project. To build this application,
+    I used the following technologies;<br>
+    <ul class="list" id="about">
+        <li>HTML</li><br>
+        <li>CSS</li><br>
+        <li>JavaScript</li><br>
+        <li>Express</li><br>
+        <li>MongoDB</li><br>
+        <li>Mongoose</li><br>
+        <li>Node.js</li><br>
+      </ul>
+      <br>
+    Thank you so much for using my application! I hope you enjoy!
+    </p>  
+</main>
+<footer id="contact">
+    Created By Honesty Moore
+    <br>
+    2023 
+</footer>
+<div id="pistols">
+<img src="./images/doublepistols.png" width="800" alt="Double Pistols Are Cool">
+</div>
 </html>

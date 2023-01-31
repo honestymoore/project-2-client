@@ -1,7 +1,7 @@
 import { 
-	indexGun, 
+	indexGuns,
 	indexLoadout,
-	createGun,
+	createGuns,
 	createLoadout,
 	showGun,
 	showLoadout,
@@ -9,67 +9,79 @@ import {
 	updateLoadout,
 	deleteGun,
 	deleteLoadout,
+	createNote,
+	signIn,
+	signUp,
 } from './api.js'
-
-import { 
+import { store } from './store.js'
+import {
 	onIndexGunSuccess,
-	onIndexLoadoutSuccess,
-	onGunFailure,
-	onLoadoutFailure,
 	onCreateGunSuccess,
 	onCreateLoadoutSuccess,
-	onShowGunSuccess, 
-	onShowLoadoutSuccess,
+	onFailure,
+	onShowGunSuccess,
 	onUpdateGunSuccess,
-	onUpdateLoadoutSuccess,
 	onDeleteGunSuccess,
-	onDeleteLoadoutSuccess
+	onSignUpSuccess,
+	onSignInSuccess,
+	onIndexLoadoutSuccess,
+	onUpdateLoadoutSuccess,
+	onShowLoadoutSuccess,
+	onDeleteLoadoutSuccess,
+	onIndexNoteSuccess,
+	onCreateNoteSuccess
 } from './ui.js'
 
-const createGunForm = document.querySelector('#create-gun-form')
-const indexGunContainer = document.querySelector('#index-gun-container')
+const indexGunsContainer = document.querySelector('#index-gun-container')
+const indexLoadoutContainer = document.querySelector('#index-loadout-container')
+const createLoadoutForm = document.querySelector('#create-loadout-form')
+const createGunsForm = document.querySelector('#create-guns-form')
 const showGunContainer = document.querySelector('#show-gun-container')
+const showLoadoutContainer = document.querySelector('#show-loadout-container')
+const signUpContainer = document.querySelector('#sign-up-form-container')
+const signInContainer = document.querySelector('#sign-in-form-container')
+const addNoteContainer = document.querySelector('#add-note-container')
 
-// GUNS
-indexGun()
+//GUNS
+indexGuns()
     .then(res => res.json())
     .then(res => {
         console.log(res)
         onIndexGunSuccess(res.guns)
     })
-    .catch(onGunFailure)
+    .catch(onFailure)
 
-createGunForm.addEventListener('submit', (event) => {
-    event.preventDefault()
-
-    const gunData = {
+createGunsForm.addEventListener('submit', (event) => {
+	event.preventDefault()
+	
+	const gunData = {
 			gun: {
 				name: event.target['name'].value,
 				class: event.target['class'].value,
-				skin: event.target['skin'].value,
+				skin: event.target['skin'].value
 			},
 		}
-    createGun(gunData)
+	createGuns(gunData)
 			.then(onCreateGunSuccess)
-			.catch(onGunFailure)
+			.catch(onFailure)
 })
 
-indexGunContainer.addEventListener('click', (event) => {
-    const id = event.target.getAttribute('data-id')
+indexGunsContainer.addEventListener('click', (event) => {
+	const id = event.target.getAttribute('data-id')
 
-    if (!id) return
+	if (!id) return
 
-    showGun(id)
-			.then((res) => res.json())
-			.then((res) => onShowGunSuccess(res.gun))
-			.catch(onGunFailure)
+	showGun(id)
+		.then((res) => res.json())
+		.then((res) => {
+			onShowGunSuccess(res.gun)
+		})
+		.catch(onFailure)
 })
 
 showGunContainer.addEventListener('submit', (event) => {
 	event.preventDefault()
-
 	const id = event.target.getAttribute('data-id')
-
 	const gunData = {
 		gun: {
 			name: event.target['name'].value,
@@ -78,36 +90,74 @@ showGunContainer.addEventListener('submit', (event) => {
 			loadout: event.target['loadout'].value
 		},
 	}
-
-    if (!id) return
-
 	updateGun(gunData, id)
 		.then(onUpdateGunSuccess)
-		.catch(onGunFailure)
+		.catch(onFailure)
 })
 
 showGunContainer.addEventListener('click', (event) => {
 	const id = event.target.getAttribute('data-id')
 
-    if (!id) return
+	if (!id) return
 
 	deleteGun(id)
 		.then(onDeleteGunSuccess)
-		.catch(onGunFailure)
+		.catch(onFailure)
 })
 
-// LOADOUT
-const createLoadoutForm = document.querySelector('#create-loadout-form')
-const indexLoadoutContainer = document.querySelector('#index-loadout-container')
-const showLoadoutContainer = document.querySelector('#show-loadout-container')
+//USER
+signUpContainer.addEventListener('submit', (event) => {
+	event.preventDefault()
+	const userData = {
+		credentials: {
+			email: event.target['email'].value,
+			password: event.target['password'].value,
+		},
+	}
+	signUp(userData).then(onSignUpSuccess).catch(onFailure)
+})
 
+signInContainer.addEventListener('submit', (event) => {
+	event.preventDefault()
+	const userData = {
+		credentials: {
+			email: event.target['email'].value,
+			password: event.target['password'].value,
+		},
+	}
+	signIn(userData)
+		.then((res) => res.json())
+		.then((res) => onSignInSuccess(res.token))
+		.then(indexLoadout)
+		.then((res) => res.json())
+		.then((res) => onIndexLoadoutSuccess(res.loadouts))
+		.then(indexGuns)
+		.then((res) => res.json())
+		.then((res) => onIndexGunSuccess(res.guns))
+		.catch(onFailure)
+})
+
+//LOADOUTS
 indexLoadout()
     .then(res => res.json())
     .then(res => {
         console.log(res)
         onIndexLoadoutSuccess(res.loadouts)
     })
-    .catch(onLoadoutFailure)
+    .catch(onFailure)
+
+indexLoadoutContainer.addEventListener('click', (event) => {
+	const id = event.target.getAttribute('data-id')
+
+	if (!id) return
+
+	showLoadout(id)
+		.then((res) => res.json())
+		.then((res) => {
+			onShowLoadoutSuccess(res.loadout)
+		})
+		.catch(onFailure)
+})
 
 createLoadoutForm.addEventListener('submit', (event) => {
     event.preventDefault()
@@ -119,44 +169,43 @@ createLoadoutForm.addEventListener('submit', (event) => {
 		}
     createLoadout(loadoutData)
 			.then(onCreateLoadoutSuccess)
-			.catch(onLoadoutFailure)
-})
-
-indexLoadoutContainer.addEventListener('click', (event) => {
-    const id = event.target.getAttribute('data-id')
-
-    if (!id) return
-
-    showLoadout(id)
-			.then((res) => res.json())
-			.then((res) => onShowLoadoutSuccess(res.loadout))
-			.catch(onLoadoutFailure)
+			.catch(onFailure)
 })
 
 showLoadoutContainer.addEventListener('submit', (event) => {
 	event.preventDefault()
-
 	const id = event.target.getAttribute('data-id')
-
 	const loadoutData = {
 		loadout: {
-			name: event.target['name'].value,
+			name: event.target['name'].value
 		},
 	}
-
-    if (!id) return
-
 	updateLoadout(loadoutData, id)
 		.then(onUpdateLoadoutSuccess)
-		.catch(onLoadoutFailure)
+		.catch(onFailure)
 })
 
 showLoadoutContainer.addEventListener('click', (event) => {
 	const id = event.target.getAttribute('data-id')
 
-    if (!id) return
+	if (!id) return
 
 	deleteLoadout(id)
 		.then(onDeleteLoadoutSuccess)
-		.catch(onLoadoutFailure)
+		.catch(onFailure)
+})
+
+// NOTES
+addNoteContainer.addEventListener('submit', (event) => {
+	event.preventDefault()
+	const noteData = {
+		note: {
+			title: event.target['title'].value,
+			content: event.target['content'].value,
+			loadoutId: store.currentLoadoutId,
+		},
+	}
+	createNote(noteData)
+		.then(onCreateNoteSuccess)
+		.catch(onFailure)
 })

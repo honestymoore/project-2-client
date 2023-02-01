@@ -58,7 +58,9 @@ export const onShowGunSuccess = (gun) => {
                 <input type="text" name="loadout" value="${gun.loadout}"/>
                 <input class="btn btn-dark" type="submit" value="Update Gun" />
             </form>
+            <div id="alert-container">
             <button class="btn btn-dark" data-id="${gun._id}">Delete Gun</button>
+            </div>
         </div>
     </div>
     `

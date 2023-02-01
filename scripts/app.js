@@ -58,7 +58,8 @@ createGunsForm.addEventListener('submit', (event) => {
 			gun: {
 				name: event.target['name'].value,
 				class: event.target['class'].value,
-				skin: event.target['skin'].value
+				skin: event.target['skin'].value,
+				loadout: event.target['loadout'].value
 			},
 		}
 	createGuns(gunData)
@@ -164,7 +165,7 @@ createLoadoutForm.addEventListener('submit', (event) => {
 
     const loadoutData = {
 			loadout: {
-				name: event.target['name'].value,
+				name: event.target['name'].value
 			},
 		}
     createLoadout(loadoutData)
@@ -202,7 +203,7 @@ addNoteContainer.addEventListener('submit', (event) => {
 		note: {
 			title: event.target['title'].value,
 			content: event.target['content'].value,
-			loadoutId: store.currentLoadoutId,
+			loadoutId: store.currentLoadoutId
 		},
 	}
 	createNote(noteData)
